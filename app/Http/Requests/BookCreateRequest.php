@@ -2,20 +2,19 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Symfony\Contracts\Service\Attribute\Required;
 
-class UserLoginRequest extends FormRequest
+class BookCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user() != null;
     }
 
     /**
@@ -26,8 +25,9 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'max:50', 'email'],
-            'password' => ['required', 'max:100']
+            'judul' => ['required', 'max:100'],
+            'tahun_terbit' => ['nullable'],
+            'penulis' => ['nullable', 'max:100'],
         ];
     }
     protected function failedValidation(Validator $validator)

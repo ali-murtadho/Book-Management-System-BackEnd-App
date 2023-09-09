@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthMiddleware;
 use Illuminate\Http\Request;
@@ -27,4 +28,10 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('/users/current', [UserController::class, 'getUser']);
     Route::patch('/users/current', [UserController::class, 'updateUser']);
     Route::delete('/users/logout', [UserController::class, 'logout']);
+
+    Route::post('/books', [BookController::class, 'createBook']);
+    Route::get('/books', [BookController::class, 'searchBook']);
+    Route::get('/books/{id}', [BookController::class, 'getBook'])->where('id', '[0-9]+');
+    Route::put('/books/{id}', [BookController::class, 'updateBook'])->where('id', '[0-9]+');
+    Route::delete('/books/{id}', [BookController::class, 'deleteBook'])->where('id', '[0-9]+');
 });

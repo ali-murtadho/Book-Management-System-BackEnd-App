@@ -15,6 +15,10 @@ class Book extends Model
     public $timestamps = true;
     public $incrementing = true;
 
+    protected $fillable = [
+        'judul', 'tahun_terbit', 'penulis'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(Book::class, "user_id", "id");

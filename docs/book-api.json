@@ -42,7 +42,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Success create book",
                         "content": {
                             "application/json": {
@@ -73,21 +73,6 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Failed create book",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "FailedBook": {
-                                        "description": "Failed create book",
-                                        "value": {
-                                            "judul": ["title must be write"]
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             },
@@ -109,10 +94,15 @@
                     {
                         "name": "size",
                         "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query"
                     }
                 ],
                 "responses": {
                     "200": {
+                        "description": "Success search contact",
                         "content": {
                             "application/json": {
                                 "schema": {
