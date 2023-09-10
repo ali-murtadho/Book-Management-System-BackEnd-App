@@ -234,16 +234,58 @@ class BookTest extends TestCase
             ]);
     }
 
-    // public function testSearchByJudul()
-    // {
-    //     $this->seed([UserSeeder::class, SearchSeeder::class]);
-    //     $response = $this->get('/api/books?judul=testjudul', [
-    //         'Authorization' => 'test'
-    //     ])
-    //         ->assertStatus(200)
-    //         ->json();
+    public function testSearchByJudul()
+    {
+        $this->seed([UserSeeder::class, SearchSeeder::class]);
+        $response = $this->get('/api/books?judul=testjudul', [
+            'Authorization' => 'test'
+        ])
+            ->assertStatus(200)
+            ->json();
 
-    //     Log::info(json_encode($response));
-    //     self::assertEquals(10, count($response['data']));
-    // }
+        Log::info(json_encode($response, JSON_PRETTY_PRINT));
+        self::assertEquals(10, count($response['data']));
+        self::assertEquals(20, $response['meta']['total']);
+    }
+
+    public function testSearchByPenulis()
+    {
+        $this->seed([UserSeeder::class, SearchSeeder::class]);
+        $response = $this->get('/api/books?penulis=testpenulis', [
+            'Authorization' => 'test'
+        ])
+            ->assertStatus(200)
+            ->json();
+
+        Log::info(json_encode($response, JSON_PRETTY_PRINT));
+        self::assertEquals(10, count($response['data']));
+        self::assertEquals(20, $response['meta']['total']);
+    }
+    public function testSearchNotFound()
+    {
+        $this->seed([UserSeeder::class, SearchSeeder::class]);
+        $response = $this->get('/api/books?penulis=not found', [
+            'Authorization' => 'test'
+        ])
+            ->assertStatus(200)
+            ->json();
+
+        Log::info(json_encode($response, JSON_PRETTY_PRINT));
+        self::assertEquals(0, count($response['data']));
+        self::assertEquals(0, $response['meta']['total']);
+    }
+    public function testSearchWithPage()
+    {
+        $this->seed([UserSeeder::class, SearchSeeder::class]);
+        $response = $this->get('/api/books?size=5&page=2', [
+            'Authorization' => 'test'
+        ])
+            ->assertStatus(200)
+            ->json();
+
+        Log::info(json_encode($response, JSON_PRETTY_PRINT));
+        self::assertEquals(5, count($response['data']));
+        self::assertEquals(20, $response['meta']['total']);
+        self::assertEquals(2, $response['meta']['current_page']);
+    }
 }

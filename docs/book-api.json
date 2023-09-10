@@ -119,9 +119,6 @@
                                                     "judul": {
                                                         "type": "string"
                                                     },
-                                                    "tahun_terbit": {
-                                                        "type": "number"
-                                                    },
                                                     "penulis": {
                                                         "type": "string"
                                                     }

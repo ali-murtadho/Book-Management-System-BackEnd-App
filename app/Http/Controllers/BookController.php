@@ -108,7 +108,7 @@ class BookController extends Controller
             }
         });
 
-        $books->paginate(perPage: $size, page: $page);
+        $books = $books->paginate(perPage: $size, page: $page);
         return new BookCollection($books);
     }
 }
