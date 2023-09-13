@@ -68,6 +68,16 @@
             },
             "get": {
                 "description": "Get list category",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "idBook",
+                        "in": "path"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "List Category",

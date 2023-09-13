@@ -13,7 +13,7 @@ class Category extends Model
     protected $keytype = "int";
     public $timestamps = true;
     public $incrementing = true;
-
+    protected $fillable = ['categoryName'];
     public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class, "book_id", "id");

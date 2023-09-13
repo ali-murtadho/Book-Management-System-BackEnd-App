@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthMiddleware;
 use Illuminate\Http\Request;
@@ -34,4 +35,10 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('/books/{id}', [BookController::class, 'getBook'])->where('id', '[0-9]+');
     Route::put('/books/{id}', [BookController::class, 'updateBook'])->where('id', '[0-9]+');
     Route::delete('/books/{id}', [BookController::class, 'deleteBook'])->where('id', '[0-9]+');
+
+    Route::post('/books/{idBook}/categories', [CategoryController::class, 'createCategory'])->where('idBook', '[0-9]+');
+    Route::get('/books/{idBook}/categories', [CategoryController::class, 'listCategory'])->where('idBook', '[0-9]+');
+    Route::get('/books/{idBook}/categories/{idCategory}', [CategoryController::class, 'getCategory'])->where('idBook', '[0-9]+')->where('idCategory', '[0-9]+');
+    Route::put('/books/{idBook}/categories/{idCategory}', [CategoryController::class, 'updateCategory'])->where('idBook', '[0-9]+')->where('idCategory', '[0-9]+');
+    Route::delete('/books/{idBook}/categories/{idCategory}', [CategoryController::class, 'deleteCategory'])->where('idBook', '[0-9]+')->where('idCategory', '[0-9]+');
 });
